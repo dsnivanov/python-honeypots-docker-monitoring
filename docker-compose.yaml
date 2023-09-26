@@ -1,0 +1,46 @@
+version: '3'
+
+networks:
+  local-honeypots:
+
+services:
+  honeypots:
+    build:
+      context: ./honeypots
+      dockerfile: Dockerfile
+    image: python-honeypots
+    ports:
+      - "21:21"
+      - "22:22"
+      - "23:23"
+      - "25:25"
+      - "53:53/udp"
+      - "80:80"
+      - "110:110"
+      - "123:123"
+      - "143:143"
+      - "161:161"
+      - "389:389"
+      - "443:443"
+      - "445:445"
+      - "1080:1080"
+      - "1433:1433"
+      - "1521:1521"
+      - "3306:3306"
+      - "5060:5060"
+      - "5432:5432"
+      - "5900:5900"
+      - "6379:6379"
+      - "6667:6667"
+      - "8080:8080"
+      - "9200:9200"
+      - "11211:11211"
+    networks:
+      - local-honeypots
+  
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000 
+    networks:
+      - local-honeypots
