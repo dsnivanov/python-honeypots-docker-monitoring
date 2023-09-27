@@ -37,10 +37,24 @@ services:
       - "11211:11211"
     networks:
       - local-honeypots
+
+  promtail:
+    image: grafana/promtail
+    ports:
+      - 9080:9080
+    networks:
+      - local-honeypots
   
   grafana:
     image: grafana/grafana:latest
     ports:
       - 3000:3000 
+    networks:
+      - local-honeypots
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - 3100:3100
     networks:
       - local-honeypots
